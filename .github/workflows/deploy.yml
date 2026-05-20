@@ -1,0 +1,45 @@
+name: Deploy Blog to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'articles/**'
+      - 'config.json'
+      - 'assets/**'
+      - 'scripts/**'
+      - 'templates/**'
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pages: write
+      id-token: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install jinja2 mistune Pillow pyyaml python-dateutil
+
+      - name: Build site
+        run: |
+          python scripts/publish.py --blog-dir . --template-dir templates --output-dir ./_site
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./_site
+          publish_branch: gh-pages
+          force_orphan: true
