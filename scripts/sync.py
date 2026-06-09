@@ -285,7 +285,7 @@ def main():
     # Determine paths
     script_dir = os.path.dirname(os.path.abspath(__file__))
     project_root = os.path.dirname(script_dir)
-    blog_dir = args.blog_dir or os.path.join(project_root, "blog")
+    blog_dir = args.blog_dir or project_root
 
     print(f"\n  [Agent Blog Publisher] Syncing...")
     print(f"  Blog dir: {blog_dir}")

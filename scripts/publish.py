@@ -183,7 +183,7 @@ def main():
     script_dir = os.path.dirname(os.path.abspath(__file__))
     project_root = os.path.dirname(script_dir)
 
-    blog_dir = args.blog_dir or os.path.join(project_root, "blog")
+    blog_dir = args.blog_dir or project_root
     template_dir = args.template_dir or os.path.join(project_root, "templates")
 
     print(f"\n  [Agent Blog Publisher] Publishing...")

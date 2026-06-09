@@ -13,9 +13,9 @@ class BlogMarkdownRenderer(mistune.HTMLRenderer):
     def __init__(self):
         super().__init__()
 
-    def image(self, src: str, alt: str = "", title: Optional[str] = None) -> str:
+    def image(self, alt: str = "", url: str = "", title: Optional[str] = None) -> str:
         """Render images with optional caption from alt text."""
-        html = f'<img src="{src}" alt="{alt}"'
+        html = f'<img src="{url}" alt="{alt}"'
         if title:
             html += f' title="{title}"'
         html += ' loading="lazy">'

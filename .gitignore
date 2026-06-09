@@ -16,3 +16,5 @@ Thumbs.db
 .idea/
 *.swp
 *.swo
+_check_imports.py
+_test_build.py
